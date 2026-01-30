@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasanboy Valiyev - IT Mutaxassis & Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #d4af37;
+            --accent-light: #f0d775;
+            --text: #ffffff;
+            --text-dim: #a0a0a0;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --primary: #ffffff;
+            --secondary: #f5f5f5;
+            --accent: #d4af37;
+            --accent-light: #f0d775;
+            --text: #0a0a0a;
+            --text-dim: #666666;
+            --bg-glass: rgba(0, 0, 0, 0.03);
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] body {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #fafafa 100%);
+        }
+
+        [data-theme="light"] body::before {
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        [data-theme="light"] .btn-primary {
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        [data-theme="light"] .project-image {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            transform: rotate(180deg);
+            border-color: var(--accent);
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            position: relative;
+        }
+
+        .lang-btn {
+            padding: 0.7rem 1.2rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 0.5rem;
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .lang-selector:hover .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            color: var(--text);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-option:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .lang-option.active {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero .profession {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.7s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.9s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 5rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .about-text p {
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.7rem 1.5rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 70px rgba(212, 175, 55, 0.3);
+        }
+
+        .project-image {
+            height: 250px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            width: 500px;
+            height: 500px;
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .project-content p {
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.5s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(360deg);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-card p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-info p {
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .contact-item-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .contact-item-info h4 {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .contact-item-info p {
+            color: var(--text);
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            width: 55px;
+            height: 55px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            transform: translateY(-5px) rotate(360deg);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .contact-cta {
+            text-align: center;
+        }
+
+        .contact-cta h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-cta p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        footer .logo {
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .portfolio-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 5rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-controls {
+                gap: 1rem;
+            }
+
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .lang-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav .container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-controls {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .lang-dropdown {
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            .lang-selector:hover .lang-dropdown {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+            .logo img {
+  width: 40px;   /* logo o‘lchami */
+  height: auto;
+  display: block;
+}
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                 <img src="IMG_5922.PNG" alt="HV logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" data-lang-uz="Asosiy" data-lang-ru="Главная" data-lang-en="Home">Asosiy</a></li>
+                <li><a href="#about" data-lang-uz="Men haqimda" data-lang-ru="Обо мне" data-lang-en="About">Men haqimda</a></li>
+                <li><a href="#portfolio" data-lang-uz="Portfolio" data-lang-ru="Портфолио" data-lang-en="Portfolio">Portfolio</a></li>
+                <li><a href="#services" data-lang-uz="Xizmatlar" data-lang-ru="Услуги" data-lang-en="Services">Xizmatlar</a></li>
+                <li><a href="#contact" data-lang-uz="Bog'lanish" data-lang-ru="Контакты" data-lang-en="Contact">Bog'lanish</a></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="lang-selector">
+                    <div class="lang-btn">
+                        <span id="currentLang">🇺🇿 UZ</span>
+                        <span style="font-size: 0.7rem;">▼</span>
+                    </div>
+                    <div class="lang-dropdown">
+                        <div class="lang-option active" data-lang="uz">
+                            <span>🇺🇿</span> O'zbekcha
+                        </div>
+                        <div class="lang-option" data-lang="ru">
+                            <span>🇷🇺</span> Русский
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <span>🇬🇧</span> English
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-toggle" id="themeToggle">
+                    <span id="themeIcon">🌙</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hasanboy Valiyev</h1>
+            <p class="profession" 
+               data-lang-uz="IT MUTAXASSIS • WEB DEVELOPER • DIGITAL CREATOR"
+               data-lang-ru="IT СПЕЦИАЛИСТ • ВЕБ-РАЗРАБОТЧИК • ЦИФРОВОЙ КРЕАТОР"
+               data-lang-en="IT SPECIALIST • WEB DEVELOPER • DIGITAL CREATOR">
+               IT MUTAXASSIS • WEB DEVELOPER • DIGITAL CREATOR
+            </p>
+            <p class="tagline"
+               data-lang-uz="Zamonaviy texnologiyalar va innovatsion yechimlar orqali raqamli kelajakni yaratamiz"
+               data-lang-ru="Создаем цифровое будущее через современные технологии и инновационные решения"
+               data-lang-en="Creating digital future through modern technologies and innovative solutions">
+               Zamonaviy texnologiyalar va innovatsion yechimlar orqali raqamli kelajakni yaratamiz
+            </p>
+            <div class="cta-buttons">
+                <a href="#portfolio" class="btn btn-primary"
+                   data-lang-uz="Ishlarimni ko'rish"
+                   data-lang-ru="Посмотреть работы"
+                   data-lang-en="View My Work">
+                   Ishlarimni ko'rish
+                </a>
+                <a href="#contact" class="btn btn-secondary"
+                   data-lang-uz="Bog'lanish"
+                   data-lang-ru="Связаться"
+                   data-lang-en="Contact Me">
+                   Bog'lanish
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title reveal"
+                data-lang-uz="Men haqimda"
+                data-lang-ru="Обо мне"
+                data-lang-en="About Me">
+                Men haqimda
+            </h2>
+            <p class="section-subtitle reveal"
+               data-lang-uz="Professional tajriba va kreativ yondashuv"
+               data-lang-ru="Профессиональный опыт и креативный подход"
+               data-lang-en="Professional experience and creative approach">
+               Professional tajriba va kreativ yondashuv
+            </p>
+            
+            <div class="about-content">
+                <div class="profile-card reveal">
+                    <div class="profile-image">
+                        <img src="IMG_5922.PNG" alt="Hasanboy profile" width="150" height="150">
+                    </div>
+
+
+                    <h3>Hasanboy Valiyev</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 2rem;"
+                       data-lang-uz="IT Mutaxassis & Web Developer"
+                       data-lang-ru="IT Специалист и Веб-разработчик"
+                       data-lang-en="IT Specialist & Web Developer">
+                       IT Mutaxassis & Web Developer
+                    </p>
+                    <div class="social-links" style="justify-content: center;">
+                        <a href="https://t.me/the_khasanboi" class="social-link" target="_blank">📱</a>
+                        <a href="https://instagram.com/the_khasanboi" class="social-link" target="_blank">📷</a>
+                        <a href="https://twitter.com/the_khasanboi" class="social-link" target="_blank">🐦</a>
+                        <a href="https://facebook.com/the_khasanboi" class="social-link" target="_blank">📘</a>
+                    </div>
+                </div>
+
+                <div class="about-text reveal">
+                    <h3
+                data-lang-uz="Salom, men Valiyev Hasanboy! 3 yillik tajribaga ega IT mutaxassis va Web Developer."
+                 data-lang-ru="Здравствуйте, я Валиев Хасанбой! Я IT-специалист и Web-разработчик с 3-летним опытом."
+                 data-lang-en="Hello, I'm Hasanboy Valiyev! An IT specialist and Web Developer with 3 years of experience.">
+  Salom, men VALIYEV Hasanboy!
+                    </h3>
+
+                    <p data-lang-uz="Men axborot-kommunikatsiya texnologiyalari sohasida faoliyat yuritaman. Zamonaviy web saytlar, dizayn va raqamli yechimlar yarataman."
+                       data-lang-ru="Я работаю в сфере информационно-коммуникационных технологий. Создаю современные веб-сайты, дизайн и цифровые решения."
+                       data-lang-en="I work in the field of information and communication technologies. I create modern websites, designs and digital solutions.">
+                       Men axborot-kommunikatsiya texnologiyalari sohasida faoliyat yuritaman. Zamonaviy web saytlar, dizayn va raqamli yechimlar yarataman.
+                    </p>
+                    <p data-lang-uz="Har bir loyiha uchun individual yondashuv, zamonaviy texnologiyalar va mijozlar ehtiyojlariga to'liq javob beruvchi yechimlar taqdim etaman. Mening maqsadim - sizning biznesingizni raqamli olamda yangi bosqichga olib chiqish."
+                       data-lang-ru="Для каждого проекта предлагаю индивидуальный подход, современные технологии и решения, полностью отвечающие потребностям клиентов. Моя цель - вывести ваш бизнес на новый уровень в цифровом мире."
+                       data-lang-en="I provide an individual approach for each project, modern technologies and solutions that fully meet client needs. My goal is to take your business to the next level in the digital world.">
+                       Har bir loyiha uchun individual yondashuv, zamonaviy texnologiyalar va mijozlar ehtiyojlariga to'liq javob beruvchi yechimlar taqdim etaman. Mening maqsadim - sizning biznesingizni raqamli olamda yangi bosqichga olib chiqish.
+                    </p>
+                    
+                    <div class="skills-list">
+                        <span class="skill-tag">Web Development</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Frontend</span>
+                        <span class="skill-tag">Backend</span>
+                        <span class="skill-tag">Mobile Apps</span>
+                        <span class="skill-tag">Digital Marketing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title reveal"
+                data-lang-uz="Portfolio"
+                data-lang-ru="Портфолио"
+                data-lang-en="Portfolio">
+                Portfolio
+            </h2>
+            <p class="section-subtitle reveal"
+               data-lang-uz="Mening oxirgi ishlarim va loyihalarim"
+               data-lang-ru="Мои последние работы и проекты"
+               data-lang-en="My latest works and projects">
+               Mening oxirgi ishlarim va loyihalarim
+            </p>
+            
+            <div class="portfolio-grid">
+                <div class="project-card reveal">
+                    <div class="project-image">🌐</div>
+                    <div class="project-content">
+                        <h3 data-lang-uz="Korporativ Web Sayt"
+                            data-lang-ru="Корпоративный Веб-сайт"
+                            data-lang-en="Corporate Website">
+                            Korporativ Web Sayt
+                        </h3>
+                        <p data-lang-uz="Zamonaviy va responsive dizaynda yaratilgan korporativ web sayt. To'liq funksional va professional interfeys."
+                           data-lang-ru="Современный корпоративный веб-сайт с адаптивным дизайном. Полнофункциональный и профессиональный интерфейс."
+                           data-lang-en="Modern corporate website with responsive design. Fully functional and professional interface.">
+                           Zamonaviy va responsive dizaynda yaratilgan korporativ web sayt. To'liq funksional va professional interfeys.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">🛒</div>
+                    <div class="project-content">
+                        <h3 data-lang-uz="E-commerce Platforma"
+                            data-lang-ru="E-commerce Платформа"
+                            data-lang-en="E-commerce Platform">
+                            E-commerce Platforma
+                        </h3>
+                        <p data-lang-uz="To'liq funksional onlayn do'kon. To'lov tizimi, admin panel va foydalanuvchi uchun qulay interfeys."
+                           data-lang-ru="Полнофункциональный интернет-магазин. Система оплаты, админ-панель и удобный пользовательский интерфейс."
+                           data-lang-en="Fully functional online store. Payment system, admin panel and user-friendly interface.">
+                           To'liq funksional onlayn do'kon. To'lov tizimi, admin panel va foydalanuvchi uchun qulay interfeys.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Database</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <h3 data-lang-uz="Mobile Application"
+                            data-lang-ru="Мобильное Приложение"
+                            data-lang-en="Mobile Application">
+                            Mobile Application
+                        </h3>
+                        <p data-lang-uz="Cross-platform mobil ilova. iOS va Android uchun optimallashtirilgan, zamonaviy dizayn."
+                           data-lang-ru="Кросс-платформенное мобильное приложение. Оптимизировано для iOS и Android, современный дизайн."
+                           data-lang-en="Cross-platform mobile application. Optimized for iOS and Android, modern design.">
+                           Cross-platform mobil ilova. iOS va Android uchun optimallashtirilgan, zamonaviy dizayn.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">🎨</div>
+                    <div class="project-content">
+                        <h3 data-lang-uz="Branding & Design"
+                            data-lang-ru="Брендинг и Дизайн"
+                            data-lang-en="Branding & Design">
+                            Branding & Design
+                        </h3>
+                        <p data-lang-uz="Kompaniya uchun to'liq branding yechimi. Logo, korporativ identifikatsiya va marketing materiallari."
+                           data-lang-ru="Полное брендинговое решение для компании. Логотип, корпоративная идентификация и маркетинговые материалы."
+                           data-lang-en="Complete branding solution for company. Logo, corporate identity and marketing materials.">
+                           Kompaniya uchun to'liq branding yechimi. Logo, korporativ identifikatsiya va marketing materiallari.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Photoshop</span>
+                            <span class="tag">Branding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">💼</div>
+                    <div class="project-content">
+                        <h3 data-lang-uz="Business Dashboard"
+                            data-lang-ru="Бизнес Панель"
+                            data-lang-en="Business Dashboard">
+                            Business Dashboard
+                        </h3>
+                        <p data-lang-uz="Biznes analitikasi uchun zamonaviy dashboard. Real-time ma'lumotlar va interaktiv grafiklar."
+                           data-lang-ru="Современная панель для бизнес-аналитики. Данные в реальном времени и интерактивные графики."
+                           data-lang-en="Modern dashboard for business analytics. Real-time data and interactive charts.">
+                           Biznes analitikasi uchun zamonaviy dashboard. Real-time ma'lumotlar va interaktiv grafiklar.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Charts</span>
+                            <span class="tag">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">🚀</div>
+                    <div class="project-content">
+                        <h3 data-lang-uz="Landing Page"
+                            data-lang-ru="Посадочная Страница"
+                            data-lang-en="Landing Page">
+                            Landing Page
+                        </h3>
+                        <p data-lang-uz="Konversiya uchun optimallashtirilgan landing page. Minimal dizayn, maksimal samaradorlik."
+                           data-lang-ru="Оптимизированная посадочная страница для конверсии. Минимальный дизайн, максимальная эффективность."
+                           data-lang-en="Conversion-optimized landing page. Minimal design, maximum efficiency.">
+                           Konversiya uchun optimallashtirilgan landing page. Minimal dizayn, maksimal samaradorlik.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">Animation</span>
+                            <span class="tag">SEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title reveal"
+                data-lang-uz="Xizmatlar"
+                data-lang-ru="Услуги"
+                data-lang-en="Services">
+                Xizmatlar
+            </h2>
+            <p class="section-subtitle reveal"
+               data-lang-uz="Sizning biznesingiz uchun professional IT yechimlar"
+               data-lang-ru="Профессиональные IT решения для вашего бизнеса"
+               data-lang-en="Professional IT solutions for your business">
+               Sizning biznesingiz uchun professional IT yechimlar
+            </p>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">💻</div>
+                    <h3>Web Development</h3>
+                    <p data-lang-uz="Zamonaviy va responsive web saytlar yaratish. Frontend va backend development, CMS integratsiya, e-commerce platformalar."
+                       data-lang-ru="Создание современных и адаптивных веб-сайтов. Frontend и backend разработка, интеграция CMS, платформы e-commerce."
+                       data-lang-en="Creating modern and responsive websites. Frontend and backend development, CMS integration, e-commerce platforms.">
+                       Zamonaviy va responsive web saytlar yaratish. Frontend va backend development, CMS integratsiya, e-commerce platformalar.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p data-lang-uz="Foydalanuvchi uchun qulay va estetik dizayn yechimlar. Wireframe, prototyping, branding va vizual identifikatsiya."
+                       data-lang-ru="Удобные и эстетичные дизайнерские решения для пользователей. Wireframe, прототипирование, брендинг и визуальная идентификация."
+                       data-lang-en="User-friendly and aesthetic design solutions. Wireframe, prototyping, branding and visual identification.">
+                       Foydalanuvchi uchun qulay va estetik dizayn yechimlar. Wireframe, prototyping, branding va vizual identifikatsiya.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">🔧</div>
+                    <h3>IT Solutions</h3>
+                    <p data-lang-uz="Korporativ IT infratuzilma, cloud xizmatlari, ma'lumotlar bazasi boshqaruvi, texnik qo'llab-quvvatlash va konsalting."
+                       data-lang-ru="Корпоративная IT инфраструктура, облачные сервисы, управление базами данных, техническая поддержка и консалтинг."
+                       data-lang-en="Corporate IT infrastructure, cloud services, database management, technical support and consulting.">
+                       Korporativ IT infratuzilma, cloud xizmatlari, ma'lumotlar bazasi boshqaruvi, texnik qo'llab-quvvatlash va konsalting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title reveal"
+                data-lang-uz="Bog'lanish"
+                data-lang-ru="Контакты"
+                data-lang-en="Contact">
+                Bog'lanish
+            </h2>
+            <p class="section-subtitle reveal"
+               data-lang-uz="Keling, birgalikda ajoyib loyihalar yarataylik"
+               data-lang-ru="Давайте вместе создадим замечательные проекты"
+               data-lang-en="Let's create great projects together">
+               Keling, birgalikda ajoyib loyihalar yarataylik
+            </p>
+            
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <h3 data-lang-uz="Aloqa ma'lumotlari"
+                        data-lang-ru="Контактная информация"
+                        data-lang-en="Contact Information">
+                        Aloqa ma'lumotlari
+                    </h3>
+                    <p data-lang-uz="Savollaringiz yoki loyiha takliflaringiz bo'lsa, menga murojaat qiling. Men har doim yangi g'oyalar va hamkorlikka tayyorman!"
+                       data-lang-ru="Если у вас есть вопросы или предложения по проектам, свяжитесь со мной. Я всегда открыт для новых идей и сотрудничества!"
+                       data-lang-en="If you have questions or project proposals, contact me. I'm always open to new ideas and collaboration!">
+                       Savollaringiz yoki loyiha takliflaringiz bo'lsa, menga murojaat qiling. Men har doim yangi g'oyalar va hamkorlikka tayyorman!
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📞</div>
+                            <div class="contact-item-info">
+                                <h4 data-lang-uz="Telefon"
+                                    data-lang-ru="Телефон"
+                                    data-lang-en="Phone">
+                                    Telefon
+                                </h4>
+                                <p>+998 93 925 19 04</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📍</div>
+                            <div class="contact-item-info">
+                                <h4 data-lang-uz="Manzil"
+                                    data-lang-ru="Адрес"
+                                    data-lang-en="Address">
+                                    Manzil
+                                </h4>
+                                <p>Namangan,Uchqorg'on</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📧</div>
+                            <div class="contact-item-info">
+                                <h4>Email</h4>
+                                <p>
+  <a href="mailto:hasanboyvaliyev09@gmail.com">
+    hasanboyvaliyev09@gmail.com
+  </a>
+</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="color: var(--text-dim); margin-bottom: 1rem;"
+                        data-lang-uz="Ijtimoiy tarmoqlar"
+                        data-lang-ru="Социальные сети"
+                        data-lang-en="Social Networks">
+                        Ijtimoiy tarmoqlar
+                    </h4>
+                    <div class="social-links">
+                        <a href="https://t.me/the_khasanboi" class="social-link" target="_blank" title="Telegram">📱</a>
+                        <a href="https://instagram.com/the_khasanboi" class="social-link" target="_blank" title="Instagram">📷</a>
+                        <a href="https://twitter.com/the_khasanboi" class="social-link" target="_blank" title="Twitter">🐦</a>
+                        <a href="https://facebook.com/the_khasanboi" class="social-link" target="_blank" title="Facebook">📘</a>
+                    </div>
+                </div>
+
+                <div class="contact-cta reveal">
+                    <h3 data-lang-uz="Loyihangizni muhokama qilishga tayyormisiz?"
+                        data-lang-ru="Готовы обсудить ваш проект?"
+                        data-lang-en="Ready to discuss your project?">
+                        Loyihangizni muhokama qilishga tayyormisiz?
+                    </h3>
+                    <p data-lang-uz="Keling, birgalikda sizning g'oyangizni hayotga tatbiq etaylik. Professional va sifatli xizmat kafolatlanadi."
+                       data-lang-ru="Давайте вместе воплотим вашу идею в жизнь. Гарантируем профессиональный и качественный сервис."
+                       data-lang-en="Let's bring your idea to life together. Professional and quality service guaranteed.">
+                       Keling, birgalikda sizning g'oyangizni hayotga tatbiq etaylik. Professional va sifatli xizmat kafolatlanadi.
+                    </p>
+                    <a href="https://t.me/the_khasanboi" class="btn btn-primary" target="_blank"
+                       data-lang-uz="Hoziroq bog'laning"
+                       data-lang-ru="Свяжитесь сейчас"
+                       data-lang-en="Contact Now">
+                       Hoziroq bog'laning
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo">Hasanboy Valiyev</div>
+            <p>&copy; 2026 Barcha huquqlar himoyalangan. | IT Mutaxassis & Web Developer</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Language Switcher
+        const langOptions = document.querySelectorAll('.lang-option');
+        const currentLangDisplay = document.getElementById('currentLang');
+        
+        // Load saved language
+        const savedLang = localStorage.getItem('language') || 'uz';
+        setLanguage(savedLang);
+
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                setLanguage(lang);
+                localStorage.setItem('language', lang);
+                
+                // Update active state
+                langOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+            });
+        });
+
+        function setLanguage(lang) {
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-lang-uz]').forEach(element => {
+                const text = element.getAttribute(`data-lang-${lang}`);
+                if (text) {
+                    if (element.tagName === 'A' || element.tagName === 'BUTTON') {
+                        element.textContent = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+
+            // Update language display
+            const langFlags = {
+                'uz': '🇺🇿 UZ',
+                'ru': '🇷🇺 RU',
+                'en': '🇬🇧 EN'
+            };
+            currentLangDisplay.textContent = langFlags[lang];
+
+            // Set active language option
+            langOptions.forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+            });
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 100;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            const theme = html.getAttribute('data-theme');
+            if (window.scrollY > 100) {
+                nav.style.background = theme === 'dark' ? 'rgba(10, 10, 10, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+            } else {
+                nav.style.background = theme === 'dark' ? 'rgba(10, 10, 10, 0.8)' : 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / 700);
+            }
+        });
+    </script>
